@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome, ${message}</h1>
+<h1>Welcome ${type}, ${message}</h1>
+<a href="">Add Customer</a>
+<a href="addoperator.jsp">Add Operator</a>
+<a href="">Add Retailer</a>
 </body>
 </html>

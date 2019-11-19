@@ -1,6 +1,8 @@
 package UserManagement.Servlets;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,9 +47,23 @@ public class LoginRegister extends HttpServlet {
 		String pwd = request.getParameter("password");
 		String submitType = request.getParameter("submit");
 		User user = userDAO.getUser(username, pwd);
+		
+		System.out.println(getServletContext().getRealPath(request.getServletPath()));
 		if(submitType.equals("login") && user!=null && user.getUserId().equals(username) && user.getPassword().equals(pwd)) {
 			request.setAttribute("message", user.getUserId());
-			request.getRequestDispatcher("welcome.jsp").forward(request, response);
+			int type = user.getType();
+			String custType = "";
+			if(type == 0) {
+				request.setAttribute("type", "Admin");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+			}else if(type == 1) {
+				custType = "Operator";
+			}else if(type == 2) {
+				custType = "Retailer";
+			}else {
+				custType = "Customer";
+			}
+			
 		}else if(submitType.equals("register")) {
 			
 		}else {

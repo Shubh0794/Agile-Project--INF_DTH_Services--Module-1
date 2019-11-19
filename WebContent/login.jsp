@@ -10,7 +10,7 @@
 	<br>
         <div align ="center">
                 <h1> LOGIN PAGE </h1>
-                <h3> <u> Login Form </u> </h3> 
+                <h3> Login Form </h3> 
                 <div>
                         <form action="LoginRegister" method="post">
                                 <br> 
