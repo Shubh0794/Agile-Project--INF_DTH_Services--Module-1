@@ -12,7 +12,7 @@
             
             <h3> <u>New User Registration</u> </h3>
             <div>
-                <form>
+                <form action="LoginRegister">
                     <table >
                         <tr>
                             <td> First Name: </td>

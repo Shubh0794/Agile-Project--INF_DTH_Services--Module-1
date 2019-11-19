@@ -9,7 +9,7 @@ static Connection con = null;
 	
 	public static Connection getConnection() {
 		try {
-			Class.forName("oracle.jdbc.OracleDriver"); //Connection Driver Info oracle.drive.oracleDriver
+			Class.forName("oracle.jdbc.driver.OracleDriver"); //Connection Driver Info oracle.drive.oracleDriver
 			
 			con = DriverManager.getConnection(url,userName,password);
  		}catch(Exception e) {

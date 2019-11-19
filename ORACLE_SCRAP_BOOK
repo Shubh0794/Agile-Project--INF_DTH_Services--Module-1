@@ -20,6 +20,7 @@ END;
 
 INSERT INTO Users VALUES(0,'sdesai1','password',0);
 
+SELECT * FROM USERS WHERE userId='sdesai1' and password='password'
 
 SELECT * FROM Users
 ----------------------------------------

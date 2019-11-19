@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import UserManagement.DAO.UserDAO;
+import UserManagement.DAO.UserDAOImpl;
+import UserManagement.Entities.User;
+
 /**
  * Servlet implementation class LoginRegister
  */
@@ -35,7 +39,21 @@ public class LoginRegister extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		UserDAO userDAO = new UserDAOImpl();
+		String username = request.getParameter("username");
+		String pwd = request.getParameter("password");
+		String submitType = request.getParameter("submit");
+		User user = userDAO.getUser(username, pwd);
+		if(submitType.equals("login") && user!=null && user.getUserId().equals(username) && user.getPassword().equals(pwd)) {
+			request.setAttribute("message", user.getUserId());
+			request.getRequestDispatcher("welcome.jsp").forward(request, response);
+		}else if(submitType.equals("register")) {
+			
+		}else {
+			request.setAttribute("message", "Data not foun, click on register!!!");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 	}
 
 }
