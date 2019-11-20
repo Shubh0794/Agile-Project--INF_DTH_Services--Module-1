@@ -47,7 +47,9 @@ public class UserDAOImpl implements UserDAO {
 				user.setType(rs.getInt(4));
 			}
 			
-	
+			rs.close();
+			rs.close();
+			con.close();
 			
 		}catch(Exception e) {
 			System.out.println(e);
