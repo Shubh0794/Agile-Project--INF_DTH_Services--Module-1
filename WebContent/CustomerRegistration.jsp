@@ -9,6 +9,8 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+          <script src="customer_validation.js"></script>
 
     <title>Customer Registration</title>
     
@@ -21,8 +23,10 @@
         <h2 style="margin: 10px 710px;"> Infinity Customer </h2>
 
         <div class="jumbotron" style="margin:25px 500px 100px;"  >
+        
+       
             
-            <form>
+            <form name = "customer_regform" onsubmit="validate_customer(); return false">
                 <div>
                     <label for="firstname"> <b>First Name</b> </label>
                     <input class="form-control" type="text" placeholder="Enter first name" name="customer_firstname" id="firstname">
@@ -58,19 +62,29 @@
 
                 <div>
                     <label for="landmark"> <b>Landmark</b> </label>
-                    <input class="form-control" type="text" placeholder="Enter last name" name="customer_landmark" id="landmark">
+                    <input class="form-control" type="text" placeholder="Enter Landmark" name="customer_landmark" id="landmark">
                     <br>
                 </div>
 
                 <div>
                     <label for="zipcode"> <b>Zipcode</b> </label>
-                    <input class="form-control" type="number" placeholder="Enter last name" name="customer_zipcode" id="zipcode">
+                    <!-- <input class="form-control" type="number" placeholder="Enter Zipcode" name="customer_zipcode" id="zipcode"> -->
+                    <select onchange="fill_zip();" id="zipcode" name = "zipcode">
+                   	<option value=10038>10038</option>
+			        <option value=60007>60007</option>
+			        <option value=90001>90001</option>
+			        <option value=94016>94016</option>
+			        <option value=33101>33101</option>
+			        <option value=08817>08817</option>
+			        <option value=88901>88901</option>
+                    </select>
                     <br>
                 </div>
                 
                 <div>
                         <label> <b>State</b> </label> &nbsp;&nbsp;
-                        <select id="state" name="state">
+                         <input class="form-control" id="state" name="state" readonly="readonly"/> 
+                        <!-- <select id="state" name="state">
                             <option value="select" selected> Select </option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -123,7 +137,7 @@
                             <option value="WV">West Virginia</option>
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
-                        </select> 
+                        </select>  -->
                 </div>
                 
                 
@@ -131,7 +145,8 @@
                 
                 <div>
                     <label> <b>City</b> </label> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select id="state" name="state">
+                    <input class="form-control" id="city" name="city" readonly="readonly"/> 
+                    <!-- <select id="city" name="city">
                         <option value="select" selected> Select </option>
                         <option>San Jose</option>
                         <option>Edison</option>
@@ -139,7 +154,7 @@
                         <option>San Francisco</option>
                         <option>San Francisco</option>
                     
-                    </select>
+                    </select> -->
                 </div>
                                 
                 <br>
@@ -163,7 +178,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="btnRegister" style=" position: relative; margin-left: 250px;"> Register </button>
-
+				 <br><br> <p style="color:red;" align="center" id="error_message"></p>
             </form>
         </div>
     </div>
