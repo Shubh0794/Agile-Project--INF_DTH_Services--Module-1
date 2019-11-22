@@ -34,13 +34,13 @@
 
                 <div>
                     <label for="contact1"> <b>Contact 1</b> </label>
-                    <input class="form-control" type="tel" placeholder="Enter contact1" name="retailer_contact1" id="contact1">
+                    <input class="form-control" type="number" placeholder="Enter contact1" name="retailer_contact1" id="contact1">
                     <br>
                 </div>
 
                 <div>
                     <label for="contact2"> <b>Contact 2</b> </label>
-                    <input class="form-control" type="tel" placeholder="Enter contact2" name="retailer_contact2" id="contact2">
+                    <input class="form-control" type="number" placeholder="Enter contact2" name="retailer_contact2" id="contact2">
                     <br>
                 </div>
 
