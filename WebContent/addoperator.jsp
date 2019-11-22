@@ -52,7 +52,7 @@
                         <tr>
                             <td> Shift End Time: </td>
                             <td>
-                                    <select id="endtime" name="starttime">
+                                    <select id="endtime" name="endtime">
                                             <option value="0" selected> Select </option>
                                             <option value="2:00">2:00</option>
                                             <option value="20:00">20:00</option>
@@ -66,7 +66,9 @@
                                     <input type="text" name="maxcustomer"> 
                                 </td>
                         </tr>
-                        
+                        <tr>
+                        	<input type="hidden" name="userid" value=""/>
+                        </tr>
                     </table>
                     <br> <br>
                     <div>

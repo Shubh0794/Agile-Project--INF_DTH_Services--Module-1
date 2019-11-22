@@ -7,7 +7,7 @@ public class Operator {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String phone;
+	private Number phone;
 	private Date shiftStart;
 	private Date shiftEnd;
 	private int totalCustomer;
@@ -37,10 +37,10 @@ public class Operator {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone() {
+	public Number getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(Number phone) {
 		this.phone = phone;
 	}
 	public Date getShiftStart() {

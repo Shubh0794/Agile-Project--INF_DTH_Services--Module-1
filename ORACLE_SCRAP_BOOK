@@ -9,6 +9,12 @@ CREATE TABLE USERS(
 CREATE SEQUENCE user_id_seq;
 
 
+SELECT user_id_seq,LAST_NUMBER FROM SEQ WHERE LAST_NUMBER=(SELECT MAX(ID)+1 FROM USERS);
+SELECT LAST_NUMBER
+  FROM user_sequences WHERE SEQUENCE_NAME = 'user_id_seq'
+
+SELECT user_id_seq.currval FROM dual;
+
 CREATE TRIGGER users_ai
 BEFORE INSERT ON Users
 FOR EACH ROW
@@ -125,6 +131,18 @@ CREATE TABLE OPERATORS(
 
 CREATE SEQUENCE operators_id_seq;
 
+SELECT SEQUENCE_NAME,LAST_NUMBER FROM SEQ WHERE LAST_NUMBER=(SELECT MAX(ID)+1 FROM MYTABLE);
+
+where TABLE_NAME = 'IDENTITY_TEST_TABLE';
+
+
+SELECT * FROM OPERATORS;
+
+select operators_id_seq, last_number from user_sequences where sequence_name = 'operators_id_seq';
+SELECT LAST_NUMBER
+  FROM user_sequences WHERE SEQUENCE_NAME = 'operators_id_seq'
+
+SELECT operators_id_seq.currval FROM dual;
 
 CREATE TRIGGER operators_ai
 BEFORE INSERT ON OPERATORS

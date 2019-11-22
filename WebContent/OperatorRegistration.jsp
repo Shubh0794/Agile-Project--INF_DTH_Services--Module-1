@@ -23,7 +23,7 @@
 
         <div class="jumbotron" style="margin:25px 600px 100px;">
 
-            <form>
+            <form action="LoginRegister" method="post">
                 <div>
                     <label for="firstname"> <b>First Name</b> </label>
                     <input class="form-control" type="text" placeholder="Enter first name" name="operator_firstname"
@@ -58,11 +58,11 @@
                 
                 <br>
                 
-                <div>
+               <!--  <div>
                     <label for="shiftEndTime"> <b>Shift End Time</b> </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="time" name="operator_shiftEndTime" id="shiftEndTime" readonly>
                 </div>
-
+ -->
                 <br>
 
                 <div>
@@ -77,8 +77,13 @@
                     <input class="form-control" type="date" name="operator_date" id="date" readonly>
                     <br>
                 </div>
+                <div>
+               
+                    <input class="form-control" type="hidden" name="operator_userid" id="userId" >
+                    <br>
+                </div>
 
-                <button type="submit" class="btn btn-primary" id="btnRegister"
+                <button type="submit" value="addoperator" name="submit" class="btn btn-primary" id="btnRegister"
                     style=" position: relative; margin-left: 170px;"> Register </button>
 
             </form>
