@@ -25,12 +25,17 @@
 <!-- <a href="RetailerRegistration.jsp">Add Retailer</a> -->
 <a href="LoginRegister?type=operator&message=view">View Operator</a>
 <a href="LoginRegister?type=logout">Logout</a>
-<div>${message}</div>
+<div> ${message}</div>
+
+<% if(request.getAttribute("userId") != null) { %>
+<div>New Created User Id:</div>
 <div> ${userId}</div>
+<% } %>
+
+<% if(request.getAttribute("password") != null){ %>
+<div>Password: </div>
 <div> ${password}</div>
-
-
-
+<% } %>
 
 
   </body>

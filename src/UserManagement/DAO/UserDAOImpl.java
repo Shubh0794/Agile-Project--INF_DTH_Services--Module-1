@@ -19,16 +19,24 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			
 			con = ConnectionProvider.getConnection();
-			String query = "INSERT INTO USERS VALUES(?,?,?)";
+			String query = "INSERT INTO USERS VALUES(?,?,?,?)";
 			ps = con.prepareStatement(query);
 			String value = firstName.substring(0,2).concat(lastName.substring(lastName.length() - 2)) + Math.round(Math.random()*1000);
-			ps.setString(1, value);
+			ps.setInt(1, 0);
 			ps.setString(2, value);
-			ps.setInt(3, type);
+			ps.setString(3, value);
+			ps.setInt(4, type);
 			
-			user.setUserId(value);
-			user.setPassword(value);
-			user.setType(type);
+			int i = ps.executeUpdate();
+			ps.close();
+			con.close();
+		
+			if(i > 0) {
+				user.setUserId(value);
+				user.setPassword(value);
+				user.setType(type);
+			}
+			
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -76,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			ps.setString(1, u.getUserId());
 			ps.setString(2, u.getPassword());
-			
+			 
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				
@@ -92,6 +100,8 @@ public class UserDAOImpl implements UserDAO {
 					return "Retailor";
 				else if(user.getType() == 3)
 					return "Customer";
+				else if(user.getType() == 4)
+					return "New";
 				else 
 					return null;
 			}
@@ -105,5 +115,28 @@ public class UserDAOImpl implements UserDAO {
 		}
 		// TODO Auto-generated method stub
 		return "Invalid User Credintials";		
+	}
+
+	@Override
+	public int changePwd(String userId, String password) {
+		int i = 0;
+		try {
+			con = ConnectionProvider.getConnection();
+			String query = "UPDATE USERS SET password = ? WHERE userId = ?";
+			ps = con.prepareStatement(query);
+			
+			ps.setString(1, password);
+			ps.setString(2, userId);
+		
+			
+			i = ps.executeUpdate();
+			ps.close();
+			con.close();
+		
+			
+		}catch(Exception e) {
+			
+		}
+		return i;	
 	}
 }

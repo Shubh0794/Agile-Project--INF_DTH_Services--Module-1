@@ -186,8 +186,14 @@ body {
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="login" name="submit">Sign in</button>
+           	
            	<label id="msgLabel" style="color:red">${message}</label>
            	<c:remove var="message" scope="session" /> 
+           	
+          
+           	<label id="msgLabel1" style="color:green">${smessage}</label>
+           	<c:remove var="smessage" scope="session" /> 
+         
             </form>
           </div>
         </div>
