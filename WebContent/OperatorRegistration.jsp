@@ -17,77 +17,66 @@
 </head>
 
 <body>
-    <div>
-
-        <h2 style="margin: 10px 710px;"> Infinity Operator </h2>
-
-        <div class="jumbotron" style="margin:25px 600px 100px;">
-
-            <form action="LoginRegister" method="post">
-                <div>
-                    <label for="firstname"> <b>First Name</b> </label>
-                    <input class="form-control" type="text" placeholder="Enter first name" name="operator_firstname"
+<%
+	if(session.getAttribute("username") == null){
+		response.sendRedirect("login.jsp");
+	}
+%>
+    <div class="container">
+		
+       	<form role="form" action="LoginRegister" method="post">
+       			<div class="card-header" style="width: 65%"> <h2> Infinity Operator </h2> </div>
+           	
+                <div class="card-body" style="width: 65%; background-color: rgba(0,0,0,.03);">
+                  <div class="form-group">
+                     <label for="firstname"> <b>First Name</b> </label>
+                    <input class="form-control"id="firstname" type="text" placeholder="Enter first name" name="operator_firstname"
                         id="firstname">
-                    <br>
-                </div>
-
-                <div>
-                    <label for="lastname"> <b>Last Name</b> </label>
+                  </div>
+                  <div class="form-group">
+                   <label for="lastname"> <b>Last Name</b> </label>
                     <input class="form-control" type="text" placeholder="Enter last name" name="operator_lastname"
                         id="lastname">
-                    <br>
-                </div>
-
-                <div class="form-group">
-                    <label for="email"> <b>Email</b> </label>
+                  </div>
+                  <div class="form-group">
+                         <label for="email"> <b>Email</b> </label>
                     <input type="email" class="form-control" id="email" name="operator_email"
                         aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-
-                <div>
-                    <label for="phone"> <b>Phone Number</b> </label>
+                  </div>
+                  <div class="form-group">
+                     <label for="phone"> <b>Phone Number</b> </label>
                     <input class="form-control" type="tel" placeholder="Enter phone number" name="operator_phone"
                         id="phone">
-                    <br>
-                </div>
-
-                <div> 
+                   
+                  </div>
+                   <div class="form-group">
                     <label for="shiftStartTime"> <b>Shift Start Time</b> </label> &nbsp;&nbsp;&nbsp;    
                     <input type="time" name="operator_shiftStartTime" id="shiftStartTime">
-                </div>
-                
-                <br>
-                
-               <!--  <div>
-                    <label for="shiftEndTime"> <b>Shift End Time</b> </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="time" name="operator_shiftEndTime" id="shiftEndTime" readonly>
-                </div>
- -->
-                <br>
-
-                <div>
-                    <label for="maxCustomers"> <b>Max Customer Number</b> </label> &nbsp;&nbsp;
+                   
+                  </div>
+                   <div class="form-group">
+                     <label for="maxCustomers"> <b>Max Customer Number</b> </label> &nbsp;&nbsp;
                     <input type="number" name="operator_maxCustomers" id="maxCustomers" min="1" max="20">
-                </div>
-
-                <br>
-
-                <div>
+                   
+                  </div>
+                   <div class="form-group">
                     <label for="date"> <b>Creation Date</b> </label>
                     <input class="form-control" type="date" name="operator_date" id="date" readonly>
-                    <br>
-                </div>
-                <div>
-               
+                   
+                  </div>
+                   <div class="form-group">
+                   
                     <input class="form-control" type="hidden" name="operator_userid" id="userId" >
-                    <br>
+                   
+                  </div>
                 </div>
+                <!-- /.card-body -->
 
-                <button type="submit" value="addoperator" name="submit" class="btn btn-primary" id="btnRegister"
+              
+                    <button type="submit" value="addoperator" name="submit" class="btn btn-primary" id="btnRegister"
                     style=" position: relative; margin-left: 170px;"> Register </button>
-
-            </form>
-        </div>
+           
+              </form>
     </div>
 
 </body>

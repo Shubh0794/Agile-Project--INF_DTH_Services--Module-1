@@ -67,13 +67,17 @@ public class LoginRegister extends HttpServlet {
 			}else if(actionType.equals("delete")){
 				int  i = operatorDAO.removeOperator(id);
 				response.sendRedirect("/INF_Module1_Team1/LoginRegister?type=operator&message=view");
-			}else {
-				
+			}
+			else {
+			
 			}
 			
 		
 		}else {
-			
+			HttpSession session = request.getSession();
+			session.removeAttribute("username");
+			session.invalidate();
+			response.sendRedirect("login.jsp");
 		}
 		
 		
@@ -96,6 +100,8 @@ public class LoginRegister extends HttpServlet {
 				
 				String type = userDAO.authentication(u);
 				if(type.equals("Admin")) {
+					HttpSession session = request.getSession();
+					session.setAttribute("username", username);
 					request.setAttribute("type", "Admin");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 				}else if(type.equals("Operator")) {
@@ -105,8 +111,12 @@ public class LoginRegister extends HttpServlet {
 				}else if(type.equals("Customer")) {
 					
 				}else {
-					request.setAttribute("message", "Data not found, click on register!!!");
-					request.getRequestDispatcher("login.jsp").forward(request, response);
+					//request.setAttribute("message", "Invalid Login Credintials !!");
+					String message = "Invalid Credentials!!";
+					request.getSession().setAttribute("message", message);
+					//request.getRequestDispatcher("login.jsp").forward(request, response);
+					response.sendRedirect("login.jsp");
+					
 				}
 				
 			}catch(Exception e) {
