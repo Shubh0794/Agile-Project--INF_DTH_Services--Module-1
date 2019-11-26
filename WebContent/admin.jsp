@@ -23,7 +23,9 @@
 
 <a href="OperatorRegistration.jsp">Add Operator</a>
 <!-- <a href="RetailerRegistration.jsp">Add Retailer</a> -->
+<a href="CustomerRegistration.jsp">Add Customer</a>
 <a href="LoginRegister?type=operator&message=view">View Operator</a>
+<a href="LoginRegister?type=customer&message=view">View Customer</a>
 <a href="LoginRegister?type=logout">Logout</a>
 <div> ${message}</div>
 

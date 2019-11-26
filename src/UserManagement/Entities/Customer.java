@@ -52,19 +52,19 @@ public class Customer {
 		return Address;
 	}
 	public void setAddress(String Address) {
-		Address = Address;
+		this.Address = Address;
 	}
 	public String getAddress2() {
 		return Address2;
 	}
 	public void setAddress2(String address2) {
-		Address2 = address2;
+		this.Address2 = address2;
 	}
 	public String getLandMark() {
 		return LandMark;
 	}
 	public void setLandMark(String landMark) {
-		LandMark = landMark;
+		this.LandMark = landMark;
 	}
 	public int getZip() {
 		return zipcode;
