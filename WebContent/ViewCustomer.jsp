@@ -319,7 +319,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
  
   btn.onclick = function() {
     modal.style.display = "block";
-    
+  }
+  
+  span.onclick = function() {
+	  modal.style.display = "none";
+  }
   
     
    function formatDate(date) {
@@ -338,7 +342,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 	document.getElementById('date').value = formatDate(new Date());
   
-  }
+ 
  </script> 
 </body>
 </html>

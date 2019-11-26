@@ -49,7 +49,7 @@ public class LoginRegister extends HttpServlet {
 		// TODO Auto-generated method stub
 		String type = request.getParameter("type");
 		
- 		String actionType = request.getParameter("message"); 
+		String actionType = request.getParameter("message"); 
 		String id = request.getParameter("id");
 		 
 		
@@ -68,12 +68,13 @@ public class LoginRegister extends HttpServlet {
 				
 				Operator operator = operatorDAO.getOperator(id);
 				request.setAttribute("operator", operator);
-				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				request.getRequestDispatcher("editoperator.jsp").forward(request, response);
 			}else if(actionType.equals("delete")){
 				int  i = operatorDAO.removeOperator(id);
 				response.sendRedirect("/INF_Module1_Team1/LoginRegister?type=operator&message=view");
-			}else {
-				
+			}
+			else {
+			
 			}
 			
 		
@@ -92,6 +93,11 @@ public class LoginRegister extends HttpServlet {
 			}else {
 				
 			}
+		}else {
+			HttpSession session = request.getSession();
+			session.removeAttribute("username");
+			session.invalidate();
+			response.sendRedirect("login.jsp");
 		}
 		
 		
@@ -114,23 +120,53 @@ public class LoginRegister extends HttpServlet {
 				
 				String type = userDAO.authentication(u);
 				if(type.equals("Admin")) {
+					HttpSession session = request.getSession();
+					session.setAttribute("username", username);
 					request.setAttribute("type", "Admin");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 				}else if(type.equals("Operator")) {
-					
+					if(u.getUserId().equals(u.getPassword())) {
+						request.setAttribute("userid", u.getUserId());
+						request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+					}else {
+						request.getRequestDispatcher("welcome.jsp").forward(request, response);
+					}
+						
 				}else if(type.equals("Retailor")) {
 					
 				}else if(type.equals("Customer")) {
 					
-				}else {
-					request.setAttribute("message", "Data not found, click on register!!!");
-					request.getRequestDispatcher("login.jsp").forward(request, response);
+				}else if(type.equals("New")) {
+					
 				}
+				else {
+					//request.setAttribute("message", "Invalid Login Credintials !!");
+					String message = "Invalid Credentials!!";
+					request.getSession().setAttribute("message", message);
+					//request.getRequestDispatcher("login.jsp").forward(request, response);
+					response.sendRedirect("login.jsp");
+					
+				}
+			
 				
 			}catch(Exception e) {
 				
 			}
-		}else if(submitType.equals("addoperator")) {
+		}else if(submitType.equals("cpwd")) {
+			String userId = request.getParameter("username");
+			String password = request.getParameter("new_password");
+			int i = userDAO.changePwd(userId, password);
+			if(i > 0) {
+				String smessage = "Password has been changed successfully!!";
+				request.getSession().setAttribute("smessage", smessage);
+				response.sendRedirect("login.jsp");
+			}else {
+				
+			}
+				
+			
+		}
+		else if(submitType.equals("addoperator")) {
 			OperatorDAO operatorDAO = new OperatorDAOImpl();
 			
 			System.out.println("Welcome to Operator Module");
@@ -209,7 +245,7 @@ public class LoginRegister extends HttpServlet {
 			customer.setOperatorId(request.getParameter("operator_name"));
 			customer.setRetailerId(request.getParameter("retailer_name"));
 			int a = cust.insertCustomerDetails(customer);
-			User user = userDAO.insertUser(customer.getFirstName(), customer.getLastName(), 1);
+			User user = userDAO.insertUser(customer.getFirstName(), customer.getLastName(), 4);
 			request.setAttribute("userId", user.getUserId());
 			request.setAttribute("password", user.getPassword());
 			request.setAttribute("message", "Added successfully!!");
