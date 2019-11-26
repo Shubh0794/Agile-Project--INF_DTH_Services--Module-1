@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome, Operator</h1>
-
-<a href="LoginRegister?type=customer&message=view">View Customer</a>
+<a href="LoginRegister?type=customer&message=update">Update Details</a>
 </body>
 </html>
