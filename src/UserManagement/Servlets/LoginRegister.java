@@ -19,10 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import UserManagement.DAO.CustomerDAO;
+import UserManagement.DAO.CustomerDAOImpl;
 import UserManagement.DAO.OperatorDAO;
 import UserManagement.DAO.OperatorDAOImpl;
 import UserManagement.DAO.UserDAO;
 import UserManagement.DAO.UserDAOImpl;
+import UserManagement.Entities.Customer;
 import UserManagement.Entities.Operator;
 import UserManagement.Entities.User;
 
@@ -46,13 +49,15 @@ public class LoginRegister extends HttpServlet {
 		// TODO Auto-generated method stub
 		String type = request.getParameter("type");
 		
-		String actionType = request.getParameter("message"); 
+ 		String actionType = request.getParameter("message"); 
 		String id = request.getParameter("id");
 		 
 		
 		
 	
 		OperatorDAO operatorDAO = new OperatorDAOImpl();
+		CustomerDAO customerDAO = new CustomerDAOImpl();
+//		Customer customer = new Customer();
 		if(type.equals("operator")) {
 			//System.out.println(actionType);
 			if(actionType.equals("view")) {
@@ -63,21 +68,30 @@ public class LoginRegister extends HttpServlet {
 				
 				Operator operator = operatorDAO.getOperator(id);
 				request.setAttribute("operator", operator);
-				request.getRequestDispatcher("editoperator.jsp").forward(request, response);
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
 			}else if(actionType.equals("delete")){
 				int  i = operatorDAO.removeOperator(id);
 				response.sendRedirect("/INF_Module1_Team1/LoginRegister?type=operator&message=view");
-			}
-			else {
-			
+			}else {
+				
 			}
 			
 		
-		}else {
-			HttpSession session = request.getSession();
-			session.removeAttribute("username");
-			session.invalidate();
-			response.sendRedirect("login.jsp");
+		}else if(type.equals("customer")) {
+			if(actionType.equals("view")) {
+				List<Customer> customers = customerDAO.viewAllCustomerDetails();
+				request.setAttribute("customersList", customers);
+				request.getRequestDispatcher("ViewCustomer.jsp").forward(request, response);
+			}else if(actionType.equals("update")){
+				Customer customers = customerDAO.viewCustomerDetails(id);
+				request.setAttribute("customer", customers);
+				request.getRequestDispatcher("editCustomer.jsp").forward(request, response);
+			}else if(actionType.equals("delete")) {
+				int i = customerDAO.deleteCustomerDetails(id);
+				response.sendRedirect("admin.jsp");
+			}else {
+				
+			}
 		}
 		
 		
@@ -100,8 +114,6 @@ public class LoginRegister extends HttpServlet {
 				
 				String type = userDAO.authentication(u);
 				if(type.equals("Admin")) {
-					HttpSession session = request.getSession();
-					session.setAttribute("username", username);
 					request.setAttribute("type", "Admin");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 				}else if(type.equals("Operator")) {
@@ -111,12 +123,8 @@ public class LoginRegister extends HttpServlet {
 				}else if(type.equals("Customer")) {
 					
 				}else {
-					//request.setAttribute("message", "Invalid Login Credintials !!");
-					String message = "Invalid Credentials!!";
-					request.getSession().setAttribute("message", message);
-					//request.getRequestDispatcher("login.jsp").forward(request, response);
-					response.sendRedirect("login.jsp");
-					
+					request.setAttribute("message", "Data not found, click on register!!!");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 				
 			}catch(Exception e) {
@@ -180,7 +188,59 @@ public class LoginRegister extends HttpServlet {
 			} catch (Exception e) {
 				
 				e.printStackTrace();
-			}		
+			}
+	
+		}else if(submitType.equals("addcustomer")){
+			CustomerDAO cust = new CustomerDAOImpl();
+			//SimpleDateFormat formatter = new SimpleDateFormat();
+			Date date = new Date();	
+			Customer customer = new Customer();
+			try {
+//			customer.setUserId(request.getParameter("customer_UserId"));
+			customer.setFirstName(request.getParameter("customer_firstname"));
+			customer.setLastName(request.getParameter("customer_lastname"));
+			customer.setEmailId(request.getParameter("customer_email"));
+			customer.setPhone(NumberFormat.getInstance().parse(request.getParameter("customer_phone")));			 
+			customer.setAddress(request.getParameter("customer_address1"));
+			customer.setAddress2(request.getParameter("customer_address2"));
+			customer.setLandMark(request.getParameter("customer_landmark"));
+			customer.setZip(Integer.parseInt(request.getParameter("zipcode")));
+			customer.setCreationDate(date);
+			customer.setOperatorId(request.getParameter("operator_name"));
+			customer.setRetailerId(request.getParameter("retailer_name"));
+			int a = cust.insertCustomerDetails(customer);
+			User user = userDAO.insertUser(customer.getFirstName(), customer.getLastName(), 1);
+			request.setAttribute("userId", user.getUserId());
+			request.setAttribute("password", user.getPassword());
+			request.setAttribute("message", "Added successfully!!");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+			}catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(submitType.equals("updatecustomer")) {
+			CustomerDAO cust = new CustomerDAOImpl();
+			Customer customer = new Customer();
+			try {
+			customer.setUserId(request.getParameter("customer_UserId"));
+			customer.setFirstName(request.getParameter("customer_firstname"));
+			customer.setLastName(request.getParameter("customer_lastname"));
+			customer.setEmailId(request.getParameter("customer_email"));
+			customer.setPhone(NumberFormat.getInstance().parse(request.getParameter("customer_phone")));
+			customer.setAddress(request.getParameter("customer_address1"));
+			customer.setAddress2(request.getParameter("customer_address2"));
+			customer.setLandMark(request.getParameter("customer_landmark"));
+			customer.setZip(Integer.parseInt(request.getParameter("zipcode")));
+			
+			int a = cust.updateCustomerDetails(customer);
+			response.sendRedirect("/INF_Module1_Team1/LoginRegister?type=customer&message=update");
+//			request.getRequestDispatcher("login.jsp").forward(request, response);
+			}catch (ParseException e) {
+					
+					e.printStackTrace();
+				}
+			
 		}else {
 			
 		}

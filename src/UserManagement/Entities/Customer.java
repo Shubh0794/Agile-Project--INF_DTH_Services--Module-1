@@ -7,11 +7,11 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String emailId;
-	private String phone;
+	private Number phone;
 	private String Address;
 	private String Address2;
 	private String LandMark;
-	private int zip;
+	private int zipcode;
 	private String city;
 	private String state;
 	private String province;
@@ -42,17 +42,17 @@ public class Customer {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public String getPhone() {
+	public Number getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(Number phone) {
 		this.phone = phone;
 	}
 	public String getAddress() {
 		return Address;
 	}
-	public void setAddress(String address) {
-		Address = address;
+	public void setAddress(String Address) {
+		Address = Address;
 	}
 	public String getAddress2() {
 		return Address2;
@@ -67,10 +67,10 @@ public class Customer {
 		LandMark = landMark;
 	}
 	public int getZip() {
-		return zip;
+		return zipcode;
 	}
-	public void setZip(int zip) {
-		this.zip = zip;
+	public void setZip(int zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getCity() {
 		return city;
