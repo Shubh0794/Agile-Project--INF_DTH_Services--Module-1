@@ -10,7 +10,9 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+	
+	<script src="operator_validation.js"></script>
+	
     <title>Operator Registration</title>
 
 
@@ -24,7 +26,7 @@
 %>
     <div class="container">
 		
-       	<form role="form" action="LoginRegister" method="post">
+       	<form role="form" action="LoginRegister" method="post" name="operator_regform" onsubmit="return validate_operator()">
        			<div class="card-header" style="width: 65%"> <h2> Infinity Operator </h2> </div>
            	
                 <div class="card-body" style="width: 65%; background-color: rgba(0,0,0,.03);">
@@ -51,9 +53,15 @@
                   </div>
                    <div class="form-group">
                     <label for="shiftStartTime"> <b>Shift Start Time</b> </label> &nbsp;&nbsp;&nbsp;    
-                    <input type="time" name="operator_shiftStartTime" id="shiftStartTime">
+                    <input type="time" name="operator_shiftStartTime" id="shiftStartTime" onchange="update_date();">
                    
                   </div>
+                  
+                  <div>
+                    <label for="shiftEndTime"> <b>Shift End Time</b> </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="time" name="operator_shiftEndTime" id="shiftEndTime" readonly>
+                </div>
+                  
                    <div class="form-group">
                      <label for="maxCustomers"> <b>Max Customer Number</b> </label> &nbsp;&nbsp;
                     <input type="number" name="operator_maxCustomers" id="maxCustomers" min="1" max="20">
@@ -75,6 +83,8 @@
               
                     <button type="submit" value="addoperator" name="submit" class="btn btn-primary" id="btnRegister"
                     style=" position: relative; margin-left: 170px;"> Register </button>
+                    
+                    <br><br> <p style="color:red;" align="center" id="error_message"></p>
            
               </form>
     </div>
@@ -89,6 +99,32 @@
         alert('this is working!!');
     } */
     
+    
+    
+    function update_date()
+    {
+    var mydate = document.getElementById("shiftStartTime");
+    // document.getElementById("date_message").innerHTML =  parseInt(mydate.value.substring(3,5)) ;
+    var hours = parseInt(mydate.value.substring(0,2));
+    var mins = mydate.value.substring(3,5);
+
+    var end_hours = hours + 8;
+    if (end_hours >= 24){
+      end_hours = end_hours - 24;
+    }
+    if(end_hours < 10 ){
+      end_hours = "0" + end_hours.toString()
+    }
+    else {
+    end_hours = end_hours.toString();
+    }
+
+    var new_endtime = end_hours + ":" + mins ;
+    document.getElementById("shiftEndTime").value = new_endtime;
+
+    }
+    
+    
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -102,7 +138,11 @@
 
         return [year, month, day].join('-');
     }
-
+	
+    document.getElementById('date').value = formatDate(new Date());
+    
+    
+    
     /* function OutputTime(intime) {
             var p1 = parseInt(intime.slice(0, 2));
             console.log(p1);
@@ -120,7 +160,12 @@
     }
 
         */
+	
 
-    document.getElementById('date').value = formatDate(new Date());
+        
+    
+        
+        
+        
 
 </script>
