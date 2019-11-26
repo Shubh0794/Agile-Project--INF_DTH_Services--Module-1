@@ -8,9 +8,12 @@
         <link href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" media="all">
         <link href="//maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        
+    	<script src="changepassword_validation.js"></script>
+    	
 </head>
 <body>
-<form action="LoginRegister" method="post">
+<form action="LoginRegister" method="post" name = "changepassword_regform" onsubmit="return validate_changepassword()">
 <div class="modal" id="password_modal">
     <div class="modal-header">
         <h3>Change Password <span class="extra-title muted"></span></h3>
@@ -42,6 +45,7 @@
       <!--   <button href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
         <button href="#" class="btn btn-primary" id="password_modal_save" type="submit" name="submit" value="cpwd">Save changes</button>
     </div>
+    <br><br> <p style="color:red;" align="center" id="error_message"></p>
 </div>
 </form>
 
