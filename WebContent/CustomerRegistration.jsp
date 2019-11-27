@@ -18,6 +18,11 @@
 
 </head>
 <body>
+<%
+	if(session.getAttribute("username") == null){
+		response.sendRedirect("login.jsp");
+	}
+%>
     <div>
         
         <h2 style="margin: 10px 710px;"> Infinity Customer </h2>

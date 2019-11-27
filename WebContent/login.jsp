@@ -193,7 +193,10 @@ body {
           
            	<label id="msgLabel1" style="color:green">${smessage}</label>
            	<c:remove var="smessage" scope="session" /> 
-         
+
+
+			 <a href="changepassword.jsp"> <u>Forgot Password?</u> </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="CustomerRegistration.jsp"> <u>New Customer Registration </u></a>
             </form>
           </div>
         </div>

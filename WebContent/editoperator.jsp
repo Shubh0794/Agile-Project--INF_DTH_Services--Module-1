@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <script src="customer_validation.js"></script>
+        <script src="operator_validation.js"></script>
 
     <title>Operator Registration</title>
 
@@ -23,7 +26,7 @@
 
         <div class="jumbotron" style="margin:25px 600px 100px;">
 
-            <form action="LoginRegister" method="post">
+            <form name="editInformation" method = "post" action = "LoginRegister" onsubmit="validate_operator(); return false">
                 <div>
                     <label for="firstname"> <b>First Name</b> </label>
                     <input class="form-control" type="text" placeholder="Enter first name" name="operator_firstname"

@@ -135,7 +135,12 @@ public class LoginRegister extends HttpServlet {
 				}else if(type.equals("Retailor")) {
 					
 				}else if(type.equals("Customer")) {
-					
+					if(u.getUserId().equals(u.getPassword())) {
+						request.setAttribute("userid", u.getUserId());
+						request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+					}else {
+						request.getRequestDispatcher("CustomerWelcome.jsp").forward(request, response);
+					}
 				}else if(type.equals("New")) {
 					
 				}
@@ -245,7 +250,7 @@ public class LoginRegister extends HttpServlet {
 			customer.setOperatorId(request.getParameter("operator_name"));
 			customer.setRetailerId(request.getParameter("retailer_name"));
 			int a = cust.insertCustomerDetails(customer);
-			User user = userDAO.insertUser(customer.getFirstName(), customer.getLastName(), 4);
+			User user = userDAO.insertUser(customer.getFirstName(), customer.getLastName(), 3);
 			request.setAttribute("userId", user.getUserId());
 			request.setAttribute("password", user.getPassword());
 			request.setAttribute("message", "Added successfully!!");
